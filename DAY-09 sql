@@ -1,0 +1,254 @@
+mysql> create database Employees;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employees          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| student            |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use employees;
+Database changed
+mysql> create table employee(
+    -> empid int,
+    -> name varchar(50),
+    -> dept varchar(50),
+    -> salary int,
+    -> joindate date
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_employees |
++---------------------+
+| employee            |
++---------------------+
+1 row in set (0.00 sec)
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| empid    | int         | YES  |     | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| dept     | varchar(50) | YES  |     | NULL    |       |
+| salary   | int         | YES  |     | NULL    |       |
+| joindate | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+mysql> insert into employee values(1,'alam freed','finance',30000,2023-02-20),
+    -> (2,'henry','marketing',40000,2023-06-29),
+    -> (3,'vimal','marketing',80000,2023-08-21),
+    -> (4,'kathir','finance','20000',2023-07-20),
+    -> (5,'levy','finance','50000',2023-05-23);
+mysql> insert into employee values(1,'vimal', 'finance',20000,'2023-09-23');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into employee values(2,'henry', 'marketing',90000,'2023-04-26');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee values(3,'priya', 'marketing',60000,'2023-04-24');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee values(4,'vijay', 'finance',30000,'2023-05-23');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values(5,'ram', 'finance',80000,'2023-08-24');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values(6,'john', 'marketing',40000,'2023-09-25');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select* from employee;
++-------+-------+-----------+--------+------------+
+| empid | name  | dept      | salary | joindate   |
++-------+-------+-----------+--------+------------+
+|     1 | vimal | finance   |  20000 | 2023-09-23 |
+|     2 | henry | marketing |  90000 | 2023-04-26 |
+|     3 | priya | marketing |  60000 | 2023-04-24 |
+|     4 | vijay | finance   |  30000 | 2023-05-23 |
+|     5 | ram   | finance   |  80000 | 2023-08-24 |
+|     6 | john  | marketing |  40000 | 2023-09-25 |
++-------+-------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where
+    -> dept ='finance';
++-------+-------+---------+--------+------------+
+| empid | name  | dept    | salary | joindate   |
++-------+-------+---------+--------+------------+
+|     1 | vimal | finance |  20000 | 2023-09-23 |
+|     4 | vijay | finance |  30000 | 2023-05-23 |
+|     5 | ram   | finance |  80000 | 2023-08-24 |
++-------+-------+---------+--------+------------+
+3 rows in set (0.04 sec)
+
+mysql> update employee
+    -> set salary=140000
+    -> where empid=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from employee;
++-------+-------+-----------+--------+------------+
+| empid | name  | dept      | salary | joindate   |
++-------+-------+-----------+--------+------------+
+|     1 | vimal | finance   |  20000 | 2023-09-23 |
+|     2 | henry | marketing |  90000 | 2023-04-26 |
+|     3 | priya | marketing | 140000 | 2023-04-24 |
+|     4 | vijay | finance   |  30000 | 2023-05-23 |
+|     5 | ram   | finance   |  80000 | 2023-08-24 |
+|     6 | john  | marketing |  40000 | 2023-09-25 |
++-------+-------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> update employee
+    ->  set dept = hr
+    -> where empid =5;
+
+mysql> update employee
+    -> set salary=salary+20000 where dept = 'marketing';
+Query OK, 3 rows affected (0.04 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from employee;
++-------+-------+-----------+--------+------------+
+| empid | name  | dept      | salary | joindate   |
++-------+-------+-----------+--------+------------+
+|     1 | vimal | finance   |  20000 | 2023-09-23 |
+|     2 | henry | marketing | 110000 | 2023-04-26 |
+|     3 | priya | marketing | 160000 | 2023-04-24 |
+|     4 | vijay | finance   |  30000 | 2023-05-23 |
+|     5 | ram   | finance   |  80000 | 2023-08-24 |
+|     6 | john  | marketing |  60000 | 2023-09-25 |
++-------+-------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> rename table  employee to emp;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc emp;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| empid    | int         | YES  |     | NULL    |       |
+| name     | varchar(50) | YES  |     | NULL    |       |
+| dept     | varchar(50) | YES  |     | NULL    |       |
+| salary   | int         | YES  |     | NULL    |       |
+| joindate | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select* from emp;
++-------+-------+-----------+--------+------------+
+| empid | name  | dept      | salary | joindate   |
++-------+-------+-----------+--------+------------+
+|     1 | vimal | finance   |  20000 | 2023-09-23 |
+|     2 | henry | marketing | 110000 | 2023-04-26 |
+|     3 | priya | marketing | 160000 | 2023-04-24 |
+|     4 | vijay | finance   |  30000 | 2023-05-23 |
+|     5 | ram   | finance   |  80000 | 2023-08-24 |
+|     6 | john  | marketing |  60000 | 2023-09-25 |
++-------+-------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table emp;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter table emp
+    -> rename column name to empname;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from emp;
++-------+---------+-----------+--------+------------+
+| empid | empname | dept      | salary | joindate   |
++-------+---------+-----------+--------+------------+
+|     1 | vimal   | finance   |  20000 | 2023-09-23 |
+|     2 | henry   | marketing | 110000 | 2023-04-26 |
+|     3 | priya   | marketing | 160000 | 2023-04-24 |
+|     4 | vijay   | finance   |  30000 | 2023-05-23 |
+|     5 | ram     | finance   |  80000 | 2023-08-24 |
+|     6 | john    | marketing |  60000 | 2023-09-25 |
++-------+---------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> drop database student;
+Query OK, 2 rows affected (0.08 sec)
++--------------------+
+|data bases          |
++--------------------+
+| employees          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from emp where empid=6;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from emp;
++-------+---------+-----------+--------+------------+
+| empid | empname | dept      | salary | joindate   |
++-------+---------+-----------+--------+------------+
+|     1 | vimal   | finance   |  20000 | 2023-09-23 |
+|     2 | henry   | marketing | 110000 | 2023-04-26 |
+|     3 | priya   | marketing | 160000 | 2023-04-24 |
+|     4 | vijay   | finance   |  30000 | 2023-05-23 |
+|     5 | ram     | finance   |  80000 | 2023-08-24 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from emp order by salary desc;
++-------+---------+-----------+--------+------------+
+| empid | empname | dept      | salary | joindate   |
++-------+---------+-----------+--------+------------+
+|     3 | priya   | marketing | 160000 | 2023-04-24 |
+|     2 | henry   | marketing | 110000 | 2023-04-26 |
+|     5 | ram     | finance   |  80000 | 2023-08-24 |
+|     4 | vijay   | finance   |  30000 | 2023-05-23 |
+|     1 | vimal   | finance   |  20000 | 2023-09-23 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from emp order by empname desc;
++-------+---------+-----------+--------+------------+
+| empid | empname | dept      | salary | joindate   |
++-------+---------+-----------+--------+------------+
+|     1 | vimal   | finance   |  20000 | 2023-09-23 |
+|     4 | vijay   | finance   |  30000 | 2023-05-23 |
+|     5 | ram     | finance   |  80000 | 2023-08-24 |
+|     3 | priya   | marketing | 160000 | 2023-04-24 |
+|     2 | henry   | marketing | 110000 | 2023-04-26 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.04 sec)
+mysql> select * from emp where dept='marketing' and salary<200000;
++-------+---------+-----------+--------+------------+
+| empid | empname | dept      | salary | joindate   |
++-------+---------+-----------+--------+------------+
+|     2 | henry   | marketing | 110000 | 2023-04-26 |
+|     3 | priya   | marketing | 160000 | 2023-04-24 |
++-------+---------+-----------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select* from emp order by salary asc;
++-------+---------+-----------+--------+------------+
+| empid | empname | dept      | salary | joindate   |
++-------+---------+-----------+--------+------------+
+|     1 | vimal   | finance   |  20000 | 2023-09-23 |
+|     4 | vijay   | finance   |  30000 | 2023-05-23 |
+|     5 | ram     | finance   |  80000 | 2023-08-24 |
+|     2 | henry   | marketing | 110000 | 2023-04-26 |
+|     3 | priya   | marketing | 160000 | 2023-04-24 |
++-------+---------+-----------+--------+------------+
+5 rows in set (0.00 sec)
