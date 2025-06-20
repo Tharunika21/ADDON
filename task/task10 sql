@@ -1,0 +1,187 @@
+mysql> create database customer;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use customer;
+Database changed
+mysql> create table student (
+    -> sroll int,
+    -> sname varchar(50),
+    -> student mark int
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mark int
+)' at line 4
+mysql> create table student (
+    -> sroll int,
+    -> sname varchar(50),
+    -> studentmark int
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> insert into student values(2323,'sathya',89);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(2324,'valarmathi',92);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into student values(2325,'pranika',90);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into student values(2326,'moni',79);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values(2327,'deva',98);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into student values(2328,'priyan',91);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from student;
++-------+------------+-------------+
+| sroll | sname      | studentmark |
++-------+------------+-------------+
+|  2323 | sathya     |          89 |
+|  2324 | valarmathi |          92 |
+|  2325 | pranika    |          90 |
+|  2326 | moni       |          79 |
+|  2327 | deva       |          98 |
+|  2328 | priyan     |          91 |
++-------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select sum(studentmark)
+    -> from student
+    -> group by studentmark
+    -> having sum(studentmark)>=80;
++------------------+
+| sum(studentmark) |
++------------------+
+|               89 |
+|               92 |
+|               90 |
+|               98 |
+|               91 |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select *
+    -> from student
+    -> where studentmark > 80;
++-------+------------+-------------+
+| sroll | sname      | studentmark |
++-------+------------+-------------+
+|  2323 | sathya     |          89 |
+|  2324 | valarmathi |          92 |
+|  2325 | pranika    |          90 |
+|  2327 | deva       |          98 |
+|  2328 | priyan     |          91 |
++-------+------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> create table course;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table course(
+    -> coursename varchar(50),
+    -> coursefee int
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into course values('sathya',23000),
+    -> insert into course values('valarmathi',33000),
+    -> insert into course values('pranika',30000),
+    -> insert into course values('moni',45000),
+    -> insert into course values('deva',55000),
+    -> insert into student values(priyan',55000);
+    '>
+    '>
+    '>
+    '>
+    '> ;
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into course values('valarmathi',33000),
+insert into course values('pranik' at line 2
+mysql> insert into student values('sathya',55000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into course values('sathya',23000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into course values('valarmathi',25000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into course values('pranika',37000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into course values('moni',45000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into course values('deva',89000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into course values('priyan',90000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from course
+    -> order by coursefee asc;
++------------+-----------+
+| coursename | coursefee |
++------------+-----------+
+| sathya     |     23000 |
+| valarmathi |     25000 |
+| pranika    |     37000 |
+| moni       |     45000 |
+| deva       |     89000 |
+| priyan     |     90000 |
++------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> create table books(
+    -> sno int,
+    -> sname varchar(50),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> create table books(
+    -> sno int,
+    -> bookname varchar(50)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> insert into  books values(1,'datamanagement');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into  books values(2,'java');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into  books values(3,'bootsrap');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into  books values(4,'html');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into  books values(5,'css');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into  books values(6,'mysql');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from books
+    -> ;
++------+----------------+
+| sno  | bookname       |
++------+----------------+
+|    1 | datamanagement |
+|    2 | java           |
+|    3 | bootsrap       |
+|    4 | html           |
+|    5 | css            |
+|    6 | mysql          |
++------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select bookname
+    -> from books
+    -> where bookname like 'j%';
++----------+
+| bookname |
++----------+
+| java     |
++----------+
+1 row in set (0.00 sec)
